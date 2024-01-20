@@ -1,8 +1,10 @@
 import * as React from "react";
 import { useState } from "react";
+import Typewriter from "typewriter-effect";
 
 const pageStyles = {
-  color: "#232129",
+  backgroundColor: "black",
+  color: "white",
   padding: 96,
   fontFamily: "-apple-system, Roboto, sans-serif, serif"
 };
@@ -176,7 +178,7 @@ const QuestionComponent = () => {
     <div>
       {!priceState ? (
         <div>
-          <h2>{question}</h2>
+          <h2 style={headingStyles}>{question}</h2>
           <input
             type="text"
             value={answer}
@@ -222,7 +224,25 @@ const QuestionComponent = () => {
 const IndexPage = () => {
   return (
     <main style={pageStyles}>
+      <Typewriter
+        onInit={(typewriter) => {
+          typewriter
+            .typeString(
+              "What franchise does the melody in the video belong to?"
+            )
+            .callFunction(() => {
+              console.log("String typed out!");
+            })
+            .pauseFor(90000)
+            .deleteAll()
+            .callFunction(() => {
+              console.log("All strings were deleted");
+            })
+            .start();
+        }}
+      />
       <QuestionComponent />
+
       <h1 style={headingStyles}>
         Congratulations
         <br />
@@ -272,4 +292,10 @@ const IndexPage = () => {
 
 export default IndexPage;
 
-export const Head = () => <title>Home Page</title>;
+export const Head = () => (
+  <>
+    <title>Home Page</title>
+
+    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+  </>
+);
