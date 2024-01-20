@@ -1,6 +1,8 @@
 import * as React from "react";
 import { useState } from "react";
 import Typewriter from "typewriter-effect";
+import VideoComp from "../components/video-component";
+import QuestionComponent from "../components/question-component";
 
 const pageStyles = {
   backgroundColor: "black",
@@ -126,122 +128,64 @@ const links = [
   }
 ];
 
-const QuestionComponent = () => {
-  const [answer, setAnswer] = useState("");
-  const [maxattempts, setmaxattempts] = useState(false);
-  const [priceState, setPriceState] = useState(false);
-  const winningMsg = "Congratulations, click to redeem your prize :)";
-  const [attempts, setAttempts] = useState(0);
-  const [showPrize, setShowPrize] = useState(false);
-
-  const question = "What franchise does the melody belong to?";
-  const wrongAnswerPhrases = [
-    "",
-    "Come on",
-    "Try again",
-    "mmhhhh...",
-    "you said the music was intoxicating",
-    "its fast and blue",
-    "it wears gloves",
-    "it has spikes on its back",
-    "really?!? watch the video again:"
-  ];
-
-  const handleAnswerChange = (e) => {
-    setAnswer(e.target.value);
-  };
-
-  const handleCheckAnswer = () => {
-    const correctAnswer = "sonic";
-    if (answer != correctAnswer && attempts != 8) {
-      setAttempts(attempts + 1);
-      if (attempts > 8) {
-        setmaxattempts(true);
-      }
-      console.log("attempts: ", attempts);
-    }
-
-    if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
-      setPriceState(true);
-    }
-  };
-
-  const handleRedeem = () => {
-    setShowPrize(true);
-  };
-
-  const handleToVideo = () => {
-    window.location.assign("https://youtu.be/OMdSDAp4Zu4");
-  };
-
-  return (
-    <div>
-      {!priceState ? (
-        <div>
-          <h2 style={headingStyles}>{question}</h2>
-          <input
-            type="text"
-            value={answer}
-            onChange={handleAnswerChange}
-            placeholder="Type your answer here"
-          />
-          <button onClick={handleCheckAnswer}>Check Answer</button>
-        </div>
-      ) : null}
-
-      <div></div>
-      <p>{attempts == 0 || priceState ? null : wrongAnswerPhrases[attempts]}</p>
-      {wrongAnswerPhrases[attempts] == "really?!? watch the video again:" ? (
-        <p>
-          <p onClick={handleToVideo}>to video</p>
-        </p>
-      ) : null}
-      <div>{priceState ? winningMsg : null}</div>
-      {priceState ? <button onClick={handleRedeem}>Redeem</button> : null}
-      <div>
-        {showPrize ? (
-          <div>
-            <h1>YOU'VE EARNED A TICKET FOR</h1>
-            {/* <Image
-              src="/deich.jpeg"
-              alt="Vercel Logo"
-              className="center"
-              width={700}
-              height={450}
-              priority
-            /> */}
-            <h1>
-              SAVE THE DATE: 24.08.2024 - KIDS IN MEINEM ALTER Tour 2024 -
-              Parkbühne Wuhlheide, Berlin
-            </h1>
-          </div>
-        ) : null}
-      </div>
-    </div>
-  );
-};
-
 const IndexPage = () => {
+  const [showVideo, setShowVideo] = useState(false);
+  const [showQuestionBtn, setshowQuestionBtn] = useState(false);
+  const [showQuestion, setShowQuestion] = useState(false);
+  const [hideQuestionBtn, sethideQuestionBtn] = useState(true);
+
+  const handleShowQuestionBtn = () => {
+    setShowQuestion(true);
+    sethideQuestionBtn(false);
+  };
+
   return (
     <main style={pageStyles}>
       <Typewriter
+        options={{
+          strings: ["Hallo", "and"],
+          autoStart: true,
+          loop: false
+        }}
         onInit={(typewriter) => {
           typewriter
-            .typeString(
-              "What franchise does the melody in the video belong to?"
-            )
             .callFunction(() => {
+              setShowVideo(true);
+              setTimeout(() => {
+                setshowQuestionBtn(true);
+                console.log("showQuestionBtn: ", showQuestionBtn);
+              }, 1500);
               console.log("String typed out!");
             })
-            .pauseFor(90000)
-            .deleteAll()
+            .pauseFor(9000000)
+            // .deleteAll()
             .callFunction(() => {
               console.log("All strings were deleted");
             })
             .start();
         }}
       />
-      <QuestionComponent />
+      {/* <Typewriter
+        options={{
+          strings: [
+            "Hallo Fry",
+            "and happy birthday",
+            "Wenn du dein Geschenk haben möchtest, du muss dieses einfache Spiel gewinnen",
+            "What franchise does the melody in the video belong to?"
+          ],
+          autoStart: true,
+          loop: false
+        }}
+      /> */}
+      {showVideo ? <VideoComp /> : null}
+
+      {showQuestionBtn && hideQuestionBtn ? (
+        <div>
+          <button onClick={handleShowQuestionBtn}>Ready? tap here</button>
+        </div>
+      ) : null}
+
+      {showQuestion ? <QuestionComponent></QuestionComponent> : null}
 
       <h1 style={headingStyles}>
         Congratulations
