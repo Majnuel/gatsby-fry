@@ -4,8 +4,8 @@ const VideoComp = () => {
   return (
     <div>
       <iframe
-        width="560"
-        height="315"
+        width="auto"
+        height="auto"
         src="https://www.youtube.com/embed/OMdSDAp4Zu4?si=0Cj1wFXVsf2g8vOT"
         title="YouTube video player"
         frameborder="0"

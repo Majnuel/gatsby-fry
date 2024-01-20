@@ -133,6 +133,7 @@ const IndexPage = () => {
   const [showQuestionBtn, setshowQuestionBtn] = useState(false);
   const [showQuestion, setShowQuestion] = useState(false);
   const [hideQuestionBtn, sethideQuestionBtn] = useState(true);
+  const [showIntro, setShowIntro] = useState(true);
 
   const handleShowQuestionBtn = () => {
     setShowQuestion(true);
@@ -141,30 +142,34 @@ const IndexPage = () => {
 
   return (
     <main style={pageStyles}>
-      <Typewriter
-        options={{
-          strings: ["Hallo", "and"],
-          autoStart: true,
-          loop: false
-        }}
-        onInit={(typewriter) => {
-          typewriter
-            .callFunction(() => {
-              setShowVideo(true);
-              setTimeout(() => {
-                setshowQuestionBtn(true);
-                console.log("showQuestionBtn: ", showQuestionBtn);
-              }, 1500);
-              console.log("String typed out!");
-            })
-            .pauseFor(9000000)
-            // .deleteAll()
-            .callFunction(() => {
-              console.log("All strings were deleted");
-            })
-            .start();
-        }}
-      />
+      {showIntro ? (
+        <Typewriter
+          options={{
+            strings: ["Hallo", "and"],
+            autoStart: true,
+            loop: false
+          }}
+          onInit={(typewriter) => {
+            typewriter
+              .callFunction(() => {
+                setShowVideo(true);
+                setShowIntro(false);
+                setTimeout(() => {
+                  setshowQuestionBtn(true);
+                  console.log("showQuestionBtn: ", showQuestionBtn);
+                }, 1500);
+                console.log("String typed out!");
+              })
+              .pauseFor(9000000)
+              // .deleteAll()
+              .callFunction(() => {
+                console.log("All strings were deleted");
+              })
+              .start();
+          }}
+        />
+      ) : null}
+
       {/* <Typewriter
         options={{
           strings: [
@@ -188,7 +193,7 @@ const IndexPage = () => {
       {showQuestion ? <QuestionComponent></QuestionComponent> : null}
 
       <h1 style={headingStyles}>
-        Congratulations
+        gatsby bs
         <br />
         <span style={headingAccentStyles}>
           — you just made a Gatsby site! 🎉🎉🎉

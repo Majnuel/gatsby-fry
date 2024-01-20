@@ -2,6 +2,12 @@ import * as React from "react";
 import { useState } from "react";
 import Typewriter from "typewriter-effect";
 
+const inputStyle = {
+  color: "black",
+  fontFamily: "-apple-system, Roboto, sans-serif, serif",
+  padding: "5px"
+};
+
 const QuestionComponent = () => {
   const [answer, setAnswer] = useState("");
   const [maxattempts, setmaxattempts] = useState(false);
@@ -9,6 +15,8 @@ const QuestionComponent = () => {
   const winningMsg = "Congratulations, click to redeem your prize :)";
   const [attempts, setAttempts] = useState(0);
   const [showPrize, setShowPrize] = useState(false);
+  const [showPrizeBtn, setShowPrizeBtn] = useState(false);
+  const [showQuestionInput, setShowQuestionInput] = useState(false);
 
   const question = "What franchise does the melody belong to?";
   const wrongAnswerPhrases = [
@@ -60,6 +68,7 @@ const QuestionComponent = () => {
                 .typeString(question)
                 .callFunction(() => {
                   console.log("String typed out!");
+                  setShowQuestionInput(true);
                 })
                 .pauseFor(2500)
                 .callFunction(() => {
@@ -68,41 +77,87 @@ const QuestionComponent = () => {
                 .start();
             }}
           />
-          <input
-            type="text"
-            value={answer}
-            onChange={handleAnswerChange}
-            placeholder="Type your answer here"
-          />
-          <button onClick={handleCheckAnswer}>Check Answer</button>
+          {showQuestionInput ? (
+            <div>
+              <input
+                type="text"
+                style={inputStyle}
+                value={answer}
+                onChange={handleAnswerChange}
+                placeholder="Type your answer here"
+              />
+              <button onClick={handleCheckAnswer}>Check Answer</button>
+            </div>
+          ) : null}
         </div>
       ) : null}
 
       <div></div>
-      <p>{attempts == 0 || priceState ? null : wrongAnswerPhrases[attempts]}</p>
+      {/* <p>{attempts == 0 || priceState ? null : wrongAnswerPhrases[attempts]}</p> */}
+      <p>
+        {attempts == 0 || priceState ? null : (
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter
+                .typeString(wrongAnswerPhrases[attempts])
+                .callFunction(() => {
+                  console.log("String typed out!");
+                })
+                .pauseFor(2500)
+                .deleteAll()
+                .callFunction(() => {
+                  console.log("All strings were deleted");
+                })
+                .start();
+            }}
+          />
+        )}
+      </p>
       {wrongAnswerPhrases[attempts] == "really?!? watch the video again:" ? (
         <p>
           <p onClick={handleToVideo}>to video</p>
         </p>
       ) : null}
-      <div>{priceState ? winningMsg : null}</div>
-      {priceState ? <button onClick={handleRedeem}>Redeem</button> : null}
+      <div>
+        {priceState ? (
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter
+                .typeString(winningMsg)
+                .callFunction(() => {
+                  console.log("String typed out!");
+                  setShowPrizeBtn(true);
+                })
+                .pauseFor(2500)
+                .callFunction(() => {
+                  console.log("All strings were deleted");
+                })
+                .start();
+            }}
+          />
+        ) : null}
+      </div>
+      {showPrizeBtn ? <button onClick={handleRedeem}>Redeem</button> : null}
       <div>
         {showPrize ? (
           <div>
-            <h1>YOU'VE EARNED A TICKET FOR</h1>
-            {/* <Image
-                src="/deich.jpeg"
-                alt="Vercel Logo"
-                className="center"
-                width={700}
-                height={450}
-                priority
-              /> */}
-            <h1>
-              SAVE THE DATE: 24.08.2024 - KIDS IN MEINEM ALTER Tour 2024 -
-              Parkbühne Wuhlheide, Berlin
-            </h1>
+            <Typewriter
+              onInit={(typewriter) => {
+                typewriter
+                  .typeString(
+                    "SAVE THE DATE: 24.08.2024 - KIDS IN MEINEM ALTER Tour 2024 - Parkbühne Wuhlheide, Berlin"
+                  )
+                  .callFunction(() => {
+                    console.log("String typed out!");
+                  })
+                  .pauseFor(2500)
+                  .deleteAll()
+                  .callFunction(() => {
+                    console.log("All strings were deleted");
+                  })
+                  .start();
+              }}
+            />
           </div>
         ) : null}
       </div>
