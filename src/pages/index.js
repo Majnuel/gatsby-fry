@@ -151,19 +151,6 @@ const IndexPage = () => {
           }}
         />
       ) : null}
-
-      {/* <Typewriter
-        options={{
-          strings: [
-            "Hallo Fry",
-            "and happy birthday",
-            "Wenn du dein Geschenk haben möchtest, du muss dieses einfache Spiel gewinnen",
-            "What franchise does the melody in the video belong to?"
-          ],
-          autoStart: true,
-          loop: false
-        }}
-      /> */}
       {showVideo ? <VideoComp /> : null}
 
       {showQuestionBtn && hideQuestionBtn ? (

@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import Typewriter from "typewriter-effect";
 import WrongAnswerComponent from "./wrong-answer-component";
+import { Link } from "gatsby";
 
 const inputStyle = {
   color: "black",
@@ -63,13 +64,11 @@ const QuestionComponent = () => {
   const [maxattempts, setmaxattempts] = useState(false);
   const [priceState, setPriceState] = useState(false);
   const [attempts, setAttempts] = useState(0);
-  const [showPrize, setShowPrize] = useState(false);
   const [showPrizeBtn, setShowPrizeBtn] = useState(false);
   const [showQuestionInput, setShowQuestionInput] = useState(false);
   const [wrongAnswerPhrase, setWrongAnswerPhrase] = useState("");
-  const [showImage, setShowImage] = useState(false);
 
-  const winningMsg = "Congratulations, click to redeem your prize :)";
+  const winningMsg = "Congratulations, tap to redeem your prize :)";
 
   const question = "What franchise does the melody belong to?";
   const wrongAnswerPhrases = [
@@ -103,10 +102,6 @@ const QuestionComponent = () => {
     if (answer.toLowerCase() === correctAnswer.toLowerCase()) {
       setPriceState(true);
     }
-  };
-
-  const handleRedeem = () => {
-    setShowPrize(true);
   };
 
   const handleToVideo = () => {
@@ -152,26 +147,10 @@ const QuestionComponent = () => {
         </div>
       ) : null}
 
-      {/* <p>{attempts == 0 || priceState ? null : wrongAnswerPhrases[attempts]}</p> */}
       <p>
         {attempts == 0 || priceState ? null : (
           <div key={attempts}>
             <WrongAnswerComponent value={wrongAnswerPhrase} />
-            {/* <Typewriter
-              onInit={(typewriter) => {
-                typewriter
-                  .typeString(wrongAnswerPhrases[attempts])
-                  .callFunction(() => {
-                    console.log("String typed out!");
-                  })
-                  .pauseFor(2500)
-                  .deleteAll()
-                  .callFunction(() => {
-                    console.log("All strings were deleted");
-                  })
-                  .start();
-              }}
-            /> */}
           </div>
         )}
       </p>
@@ -201,9 +180,9 @@ const QuestionComponent = () => {
       </div>
       {showPrizeBtn ? (
         <div style={displayFlex}>
-          <button style={redeemButtonStyle} onClick={handleRedeem}>
-            Redeem
-          </button>
+          <Link to="prize-page">
+            <button style={redeemButtonStyle}>Redeem</button>
+          </Link>
         </div>
       ) : null}
     </div>
