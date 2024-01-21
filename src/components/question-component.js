@@ -206,35 +206,6 @@ const QuestionComponent = () => {
           </button>
         </div>
       ) : null}
-      <div>
-        {showPrize ? (
-          <div>
-            <Typewriter
-              onInit={(typewriter) => {
-                typewriter
-                  .typeString(
-                    "SAVE THE DATE: 24.08.2024 - KIDS IN MEINEM ALTER Tour 2024 - Parkbühne Wuhlheide, Berlin"
-                  )
-                  .callFunction(() => {
-                    console.log("String typed out!");
-                  })
-                  .pauseFor(1500)
-                  .callFunction(() => {
-                    console.log("All strings were deleted");
-                    setShowImage(true);
-                  })
-                  .start();
-              }}
-            />
-          </div>
-        ) : null}
-        {showImage ? (
-          <img
-            alt="deich kind"
-            src="https://t2.genius.com/unsafe/680x680/https%3A%2F%2Fimages.genius.com%2F0c1654819b62489e98d3f1a6cdbe8f2e.1000x1000x1.png"
-          />
-        ) : null}
-      </div>
     </div>
   );
 };

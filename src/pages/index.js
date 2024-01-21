@@ -3,6 +3,7 @@ import { useState } from "react";
 import Typewriter from "typewriter-effect";
 import VideoComp from "../components/video-component";
 import QuestionComponent from "../components/question-component";
+import { Link } from "gatsby";
 
 const pageStyles = {
   backgroundColor: "black",
@@ -119,10 +120,18 @@ const IndexPage = () => {
 
   return (
     <main style={pageStyles}>
+      <Link to="/prize-page">
+        <button>test</button>
+      </Link>
       {showIntro ? (
         <Typewriter
           options={{
-            strings: ["Hallo", "and"],
+            sstrings: [
+              "Hallo Fry",
+              "and happy birthday",
+              "Wenn du dein Geschenk haben möchtest, du muss dieses einfache Spiel gewinnen",
+              "What franchise does the melody in the video belong to?"
+            ],
             autoStart: true,
             loop: false
           }}
