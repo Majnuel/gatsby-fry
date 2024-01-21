@@ -1,8 +1,15 @@
 import * as React from "react";
 
+const videoSyle = {
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  marginBottom: 15
+};
+
 const VideoComp = () => {
   return (
-    <div>
+    <div style={videoSyle}>
       <iframe
         width="auto"
         height="auto"
