@@ -126,8 +126,7 @@ const IndexPage = () => {
             strings: [
               "Hallo Fry",
               "and happy birthday",
-              "Wenn du dein Geschenk haben möchtest, du muss dieses einfache Spiel gewinnen",
-              "What franchise does the melody in the video belong to?"
+              "Wenn du dein Geschenk haben möchtest, du muss dieses einfache Spiel gewinnen"
             ],
             autoStart: true,
             loop: false
@@ -170,7 +169,7 @@ const IndexPage = () => {
       {showQuestionBtn && hideQuestionBtn ? (
         <div style={marginBottom15}>
           {" "}
-          Ready? tap
+          Already listened? tap
           <button style={buttonStyle} onClick={handleShowQuestionBtn}>
             here
           </button>
