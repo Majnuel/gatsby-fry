@@ -120,13 +120,10 @@ const IndexPage = () => {
 
   return (
     <main style={pageStyles}>
-      <Link to="/prize-page">
-        <button>test</button>
-      </Link>
       {showIntro ? (
         <Typewriter
           options={{
-            sstrings: [
+            strings: [
               "Hallo Fry",
               "and happy birthday",
               "Wenn du dein Geschenk haben möchtest, du muss dieses einfache Spiel gewinnen",
